@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "4ec22a94-5c8e-4ff5-90b8-13c164935cc3",
+		"name": "Gorest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//get the response body",
+							"var response = pm.response.json();",
+							"console.log(response.data.name);",
+							"",
+							"//get the ID from the response and store it as an environment variable to use it in other requests",
+							"pm.environment.set(\"ID\",response.data.id);",
+							"",
+							"// get the value of Name env variable",
+							"var name = pm.environment.get(\"Name\");",
+							"console.log(name)",
+							"//verify that (data.name) in the response body contains Messi",
+							"pm.test(\"Verify that the name exists in the response body\", function () {",
+							"    pm.expect(response.data.name).to.eql(name);",
+							"});",
+							"",
+							"pm.test(\"Verify Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{GorestToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{Name}}\",\n     \"gender\":\"male\",\n      \"email\":\"{{Email}}\", \n      \"status\":\"active\"\n      }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//get the response body",
+							"var response = pm.response.json();",
+							"console.log(response.data.name);",
+							"",
+							"// get the value of Name env variable",
+							"var Updatedname = pm.environment.get(\"UpdatedName\");",
+							"console.log(Updatedname)",
+							"var Updatedemail = pm.environment.get(\"UpdatedEmail\");",
+							"",
+							"//verify that (data.name) in the response body contains Messi",
+							"pm.test(\"Verify that the name is updated in the response body\", function () {",
+							"    pm.expect(response.data.name).to.eql(Updatedname);",
+							"});",
+							"",
+							"pm.test(\"Verify that the email is  updated in the response body\", function () {",
+							"    pm.expect(response.data.email).to.eql(Updatedemail);",
+							"});",
+							"",
+							"pm.test(\"Verify Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{GorestToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ACCESS-TOKEN"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"{{UpdatedName}}\", \n\"email\":\"{{UpdatedEmail}}\"\n}"
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/{{ID}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{GorestToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ACCESS-TOKEN"
+					}
+				],
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/{{ID}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

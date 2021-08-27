@@ -1,0 +1,29 @@
+{
+	"id": "5f7dab0c-5d23-44b8-8ff9-d16509e2d388",
+	"values": [
+		{
+			"key": "uuid",
+			"value": "",
+			"enabled": false
+		},
+		{
+			"key": "board name",
+			"value": "",
+			"enabled": false
+		},
+		{
+			"key": "Key",
+			"value": "",
+			"enabled": false
+		},
+		{
+			"key": "GorestToken",
+			"value": "7cd426758879d62eedd68f9f33dfd8e75755163f1b5274e5aad5c013d7b42446",
+			"enabled": true
+		}
+	],
+	"name": "My Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2021-08-27T11:34:05.081Z",
+	"_postman_exported_using": "Postman/8.10.0"
+}
